@@ -4,3 +4,6 @@
 [submodule ".vim"]
 	path = .vim
 	url = git://github.com/bling/dotvim.git
+[submodule ".nvm"]
+	path = .nvm
+	url = git://github.com/creationix/nvm.git
