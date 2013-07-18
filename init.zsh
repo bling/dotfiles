@@ -23,6 +23,12 @@ if [ -n "$ZSH_VERSION" ]; then
     done
   fi
 fi
+if [ ! -d "$HOME/.powerline" ]; then
+  git clone https://github.com/Lokaltog/powerline.git $HOME/.powerline
+fi
+
+ln -s ./.ctags $HOME/.ctags
+ln -s ./.tmux.conf $HOME/.tmux.conf
 
 source $HOME/.nvm/nvm.sh
 
