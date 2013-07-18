@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ ! -d "$HOME/.vim" ]; then
   git clone --recursive git@github.com:bling/dotvim.git $HOME/.vim
