@@ -1,9 +1,0 @@
-[submodule ".zprezto"]
-	path = .zprezto
-	url = git://github.com/bling/prezto.git
-[submodule ".vim"]
-	path = .vim
-	url = git://github.com/bling/dotvim.git
-[submodule ".nvm"]
-	path = .nvm
-	url = git://github.com/creationix/nvm.git
