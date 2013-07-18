@@ -1,5 +1,3 @@
-#!/bin/bash
-
 if [ ! -d "$HOME/.vim" ]; then
   git clone --recursive git@github.com:bling/dotvim.git $HOME/.vim
   if [ ! -f "$HOME/.vimrc" ]; then
@@ -12,15 +10,17 @@ fi
 if [ ! -d "$HOME/.rbenv" ]; then
   git clone https://github.com/sstephenson/rbenv.git $HOME/.rbenv
 fi
+if [ ! -d "$HOME/.rbenv/plugins/ruby-build" ]; then
+  mkdir -p "$HOME/.rbenv/plugins"
+  git clone https://github.com/sstephenson/ruby-build.git $HOME/.rbenv/plugins/ruby-build
+fi
 if [ -n "$ZSH_VERSION" ]; then
   if [ ! -d "$HOME/.zprezto" ]; then
     git clone --recursive git@github.com:bling/prezto.git $HOME/.zprezto
-    ln -s $HOME/.zprezto/runcoms/zlogin $HOME/.zlogin
-    ln -s $HOME/.zprezto/runcoms/zlogout $HOME/.zlogout
-    ln -s $HOME/.zprezto/runcoms/zpreztorc $HOME/.zpreztorc
-    ln -s $HOME/.zprezto/runcoms/zprofile $HOME/.zprofile
-    ln -s $HOME/.zprezto/runcoms/zshenv $HOME/.zshenv
-    ln -s $HOME/.zprezto/runcoms/zshrc $HOME/.zshrc
+    setopt EXTENDED_GLOB
+    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+      ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+    done
   fi
 fi
 
