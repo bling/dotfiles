@@ -1,3 +1,5 @@
+BASEDIR=$(dirname $0)
+
 if [ ! -d "$HOME/.vim" ]; then
   git clone --recursive git@github.com:bling/dotvim.git $HOME/.vim
   if [ ! -f "$HOME/.vimrc" ]; then
@@ -27,8 +29,12 @@ if [ ! -d "$HOME/.powerline" ]; then
   git clone https://github.com/Lokaltog/powerline.git $HOME/.powerline
 fi
 
-ln -s ./.ctags $HOME/.ctags
-ln -s ./.tmux.conf $HOME/.tmux.conf
+if [ ! -f "$HOME/.ctags" ]; then
+  ln -s $BASEDIR/.ctags $HOME/.ctags
+fi
+if [ ! -f "$HOME/.tmux.conf" ]; then
+  ln -s $BASEDIR/.tmux.conf $HOME/.tmux.conf
+fi
 
 source $HOME/.nvm/nvm.sh
 
