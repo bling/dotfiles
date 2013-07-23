@@ -1,9 +1,11 @@
-BASEDIR=$(dirname $0)
+pushd `dirname $0` > /dev/null
+BASEDIR=`pwd`
+popd > /dev/null
 
 if [ ! -d "$HOME/.vim" ]; then
   git clone --recursive git@github.com:bling/dotvim.git $HOME/.vim
   if [ ! -f "$HOME/.vimrc" ]; then
-    echo -e "let g:dotvim_settings={}\nlet g:dotvim_settings.version=1\nsource ~/.vim/vimrc" > $HOME/.vimrc
+    echo "let g:dotvim_settings={}\nlet g:dotvim_settings.version=1\nsource ~/.vim/vimrc" > $HOME/.vimrc
   fi
 fi
 if [ ! -d "$HOME/.nvm" ]; then
