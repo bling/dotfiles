@@ -1,23 +1,46 @@
+# vim: fdm=marker
+
 pushd `dirname $0` > /dev/null
 BASEDIR=`pwd`
 popd > /dev/null
 
-if [ ! -d "$HOME/.vim" ]; then
-  git clone --recursive git@github.com:bling/dotvim.git $HOME/.vim
-  if [ ! -f "$HOME/.vimrc" ]; then
-    echo "let g:dotvim_settings={}\nlet g:dotvim_settings.version=1\nsource ~/.vim/vimrc" > $HOME/.vimrc
+# FUNCTIONS {{{
+
+function __symlink {
+  if [ ! -f "$HOME/$1" -a ! -d "$HOME/$1" ]; then
+    echo "symlinking $BASEDIR/$1  =>  $HOME/$1"
+    ln -s "$BASEDIR/$1" "$HOME/$1"
   fi
-fi
-if [ ! -d "$HOME/.nvm" ]; then
-  git clone https://github.com/creationix/nvm.git $HOME/.nvm
-fi
-if [ ! -d "$HOME/.rbenv" ]; then
-  git clone https://github.com/sstephenson/rbenv.git $HOME/.rbenv
-fi
+}
+
+function __clone {
+  if [ ! -d "$BASEDIR/$2" ]; then
+    git clone --recursive "$1" "$BASEDIR/$2"
+  fi
+  __symlink $2
+}
+
+# }}}
+
+# RUBY {{{
+__clone 'https://github.com/sstephenson/rbenv.git' '.rbenv'
 if [ ! -d "$HOME/.rbenv/plugins/ruby-build" ]; then
   mkdir -p "$HOME/.rbenv/plugins"
   git clone https://github.com/sstephenson/ruby-build.git $HOME/.rbenv/plugins/ruby-build
 fi
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+# }}}
+
+# NODE {{{
+
+__clone 'https://github.com/creationix/nvm.git' '.nvm'
+source $HOME/.nvm/nvm.sh
+
+# }}}
+
+# PREZTO {{{
+
 if [ -n "$ZSH_VERSION" ]; then
   if [ ! -d "$HOME/.zprezto" ]; then
     git clone --recursive git@github.com:bling/prezto.git $HOME/.zprezto
@@ -27,18 +50,19 @@ if [ -n "$ZSH_VERSION" ]; then
     done
   fi
 fi
-if [ ! -d "$HOME/.powerline" ]; then
-  git clone https://github.com/Lokaltog/powerline.git $HOME/.powerline
+
+# }}}
+
+# VIM {{{
+
+__clone 'git@github.com:bling/dotvim.git' '.vim'
+if [ ! -f "$HOME/.vimrc" ]; then
+  echo "let g:dotvim_settings={}\nlet g:dotvim_settings.version=1\nsource ~/.vim/vimrc" > $HOME/.vimrc
 fi
 
-if [ ! -f "$HOME/.ctags" ]; then
-  ln -s $BASEDIR/.ctags $HOME/.ctags
-fi
-if [ ! -f "$HOME/.tmux.conf" ]; then
-  ln -s $BASEDIR/.tmux.conf $HOME/.tmux.conf
-fi
+# }}}
 
-source $HOME/.nvm/nvm.sh
+__clone 'https://github.com/Lokaltog/powerline.git' '.powerline'
+__symlink '.ctags'
+__symlink '.tmux.conf'
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
