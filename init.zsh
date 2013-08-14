@@ -43,7 +43,7 @@ source $HOME/.nvm/nvm.sh
 
 if [ -n "$ZSH_VERSION" ]; then
   if [ ! -d "$HOME/.zprezto" ]; then
-    git clone --recursive git@github.com:bling/prezto.git $HOME/.zprezto
+    __clone 'git@github.com:bling/prezto.git' '.zprezto'
     setopt EXTENDED_GLOB
     for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
       ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
