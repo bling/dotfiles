@@ -72,3 +72,4 @@ __clone 'https://github.com/Lokaltog/powerline.git' '.powerline'
 __symlink '.ctags'
 __symlink '.tmux.conf'
 
+export PATH="$BASEDIR/bin:$PATH"
