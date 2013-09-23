@@ -28,6 +28,7 @@ if [ ! -d "$HOME/.rbenv/plugins/ruby-build" ]; then
   mkdir -p "$HOME/.rbenv/plugins"
   git clone https://github.com/sstephenson/ruby-build.git $HOME/.rbenv/plugins/ruby-build
 fi
+export PATH="$HOME/.rbenv/shims:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 # }}}
@@ -65,6 +66,14 @@ __clone 'git@github.com:bling/dotvim.git' '.vim'
 if [ ! -f "$HOME/.vimrc" ]; then
   echo "let g:dotvim_settings={}\nlet g:dotvim_settings.version=1\nsource ~/.vim/vimrc" > $HOME/.vimrc
 fi
+
+# }}}
+
+# EMACS {{{
+
+__clone 'git@github.com:bling/dotemacs.git' '.emacs.d'
+export ALTERNATE_EDITOR=""
+alias emacs='emacsclient -t'
 
 # }}}
 
