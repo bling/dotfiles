@@ -28,15 +28,11 @@ if [ ! -d "$HOME/.rbenv/plugins/ruby-build" ]; then
   mkdir -p "$HOME/.rbenv/plugins"
   git clone https://github.com/sstephenson/ruby-build.git $HOME/.rbenv/plugins/ruby-build
 fi
-export PATH="$HOME/.rbenv/shims:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
 # }}}
 
 # NODE {{{
 
 __clone 'https://github.com/creationix/nvm.git' '.nvm'
-source $HOME/.nvm/nvm.sh
 
 # }}}
 
