@@ -23,16 +23,44 @@ function __clone {
 # }}}
 
 # RUBY {{{
-__clone 'https://github.com/sstephenson/rbenv.git' '.rbenv'
-if [ ! -d "$HOME/.rbenv/plugins/ruby-build" ]; then
-  mkdir -p "$HOME/.rbenv/plugins"
-  git clone https://github.com/sstephenson/ruby-build.git $HOME/.rbenv/plugins/ruby-build
-fi
+
+function bootstrap-rbenv {
+  __clone 'https://github.com/sstephenson/rbenv.git' '.rbenv'
+  if [ ! -d "$HOME/.rbenv/plugins/ruby-build" ]; then
+    mkdir -p "$HOME/.rbenv/plugins"
+    git clone https://github.com/sstephenson/ruby-build.git $HOME/.rbenv/plugins/ruby-build
+  fi
+}
+
 # }}}
 
 # NODE {{{
 
-__clone 'https://github.com/creationix/nvm.git' '.nvm'
+function bootstrap-nvm {
+  __clone 'https://github.com/creationix/nvm.git' '.nvm'
+}
+
+# }}}
+
+# VIM {{{
+
+function bootstrap-vim {
+  __clone 'git@github.com:bling/dotvim.git' '.vim'
+  if [ ! -f "$HOME/.vimrc" ]; then
+    echo "let g:dotvim_settings={}\nlet g:dotvim_settings.version=1\nsource ~/.vim/vimrc" > $HOME/.vimrc
+  fi
+}
+
+# }}}
+
+# EMACS {{{
+
+function bootstrap-emacs {
+  __clone 'git@github.com:bling/dotemacs.git' '.emacs.d'
+}
+
+export ALTERNATE_EDITOR=""
+alias emacs='emacsclient -t'
 
 # }}}
 
@@ -46,7 +74,6 @@ if [ -n "$ZSH_VERSION" ]; then
     git remote add upstream https://github.com/sorin-ionescu/prezto.git
     popd
 
-    https://github.com/sorin-ionescu/prezto.git
     setopt EXTENDED_GLOB
     for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
       ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
@@ -56,22 +83,6 @@ fi
 
 # }}}
 
-# VIM {{{
-
-__clone 'git@github.com:bling/dotvim.git' '.vim'
-if [ ! -f "$HOME/.vimrc" ]; then
-  echo "let g:dotvim_settings={}\nlet g:dotvim_settings.version=1\nsource ~/.vim/vimrc" > $HOME/.vimrc
-fi
-
-# }}}
-
-# EMACS {{{
-
-__clone 'git@github.com:bling/dotemacs.git' '.emacs.d'
-export ALTERNATE_EDITOR=""
-alias emacs='emacsclient -t'
-
-# }}}
 
 __clone 'https://github.com/Lokaltog/powerline.git' '.powerline'
 __symlink '.ctags'
