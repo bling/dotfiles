@@ -61,6 +61,7 @@ function bootstrap-emacs {
 
 export ALTERNATE_EDITOR=""
 alias emacs='emacsclient -t'
+alias emacsw='emacsclient -c -n'
 
 # }}}
 
