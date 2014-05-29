@@ -93,12 +93,16 @@ if [ ! -f "$HOME/.gitconfig" ]; then
   echo "  br = branch" >> "$HOME/.gitconfig"
   echo "  st = status" >> "$HOME/.gitconfig"
   echo "  co = checkout" >> "$HOME/.gitconfig"
+  echo "  ci = commit" >> "$HOME/.gitconfig"
   echo "  log = log --graph" >> "$HOME/.gitconfig"
   echo "  rb = rebase" >> "$HOME/.gitconfig"
   echo "  lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all" >> "$HOME/.gitconfig"
 
   echo "[branch]" >> "$HOME/.gitconfig"
   echo "  autosetuprebase = always" >> "$HOME/.gitconfig"
+
+  echo "[push]" >> "$HOME/.gitconfig"
+  echo "  default = simple" >> "$HOME/.gitconfig"
 fi
 
 # }}}
