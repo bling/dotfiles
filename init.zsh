@@ -38,6 +38,9 @@ function bootstrap-rbenv {
 
 function bootstrap-nvm {
   __clone 'https://github.com/creationix/nvm.git' '.nvm'
+  touch "$HOME/.profile"
+  echo "export NVM_DIR=\"$HOME/.nvm\"" >> $HOME/.profile
+  echo "source ~/.nvm/nvm.sh" >> $HOME/.profile
 }
 
 # }}}

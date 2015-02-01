@@ -2,6 +2,10 @@
 
 here be dragons
 
+# prereqs
+
+zsh
+
 # install
 
 1. clone to `~/.dotfiles`
@@ -9,4 +13,4 @@ here be dragons
 
 # license
 
-MIT License. Copyright (c) 2013-2014 Bailey Ling.
+MIT License. Copyright (c) 2013-2015 Bailey Ling.
