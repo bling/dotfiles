@@ -2,5 +2,6 @@
 .emacs.d
 .nvm
 .rbenv
+.pyenv
 .powerline
 .zprezto

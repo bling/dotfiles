@@ -34,6 +34,18 @@ function bootstrap-rbenv {
 
 # }}}
 
+# PYTHON {{{
+
+function bootstrap-pyenv {
+  __clone 'https://github.com/yyuu/pyenv.git' '.pyenv'
+  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> $HOME/.profile
+  echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> $HOME/.profile
+  echo 'export PATH="$HOME/.pyenv/shims:$PATH"' >> $HOME/.profile
+  echo 'eval "$(pyenv init -)"' >> $HOME/.profile
+}
+
+# }}}
+
 # NODE {{{
 
 function bootstrap-nvm {
